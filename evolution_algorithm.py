@@ -22,111 +22,6 @@ def transform_route(route):
     return result
 
 
-def draw_route(screen, route, base):
-    colors = [
-        (205, 92, 92),
-        (255, 140, 0),
-        (255, 160, 122),
-        (0, 0, 128),
-        (178, 34, 34),
-        (255, 182, 193),
-        (255, 20, 147),
-        (255, 127, 80),
-        (0, 255, 255),
-        (221, 160, 221),
-        (255, 0, 255),
-        (75, 0, 130),
-        (205, 92, 92),
-        (255, 140, 0),
-        (255, 160, 122),
-        (0, 0, 128),
-        (178, 34, 34),
-        (255, 182, 193),
-        (255, 20, 147),
-        (255, 127, 80),
-        (255, 215, 0),
-        (221, 160, 221),
-        (255, 0, 255),
-        (75, 0, 130),
-        (205, 92, 92),
-        (255, 140, 0),
-        (255, 160, 122),
-        (0, 0, 128),
-        (178, 34, 34),
-        (255, 182, 193),
-        (255, 20, 147),
-        (255, 127, 80),
-        (255, 215, 0),
-        (221, 160, 221),
-        (255, 0, 255),
-        (75, 0, 130),
-        (205, 92, 92),
-        (255, 140, 0),
-        (255, 160, 122),
-        (0, 0, 128),
-        (178, 34, 34),
-        (255, 182, 193),
-        (255, 20, 147),
-        (255, 127, 80),
-        (255, 215, 0),
-        (221, 160, 221),
-        (255, 0, 255),
-        (75, 0, 130),
-        (205, 92, 92),
-        (255, 140, 0),
-        (255, 160, 122),
-        (0, 0, 128),
-        (178, 34, 34),
-        (255, 182, 193),
-        (255, 20, 147),
-        (255, 127, 80),
-        (255, 215, 0),
-        (221, 160, 221),
-        (255, 0, 255),
-        (75, 0, 130),
-        (205, 92, 92),
-        (255, 140, 0),
-        (255, 160, 122),
-        (0, 0, 128),
-        (178, 34, 34),
-        (255, 182, 193),
-        (255, 20, 147),
-        (255, 127, 80),
-        (255, 215, 0),
-        (221, 160, 221),
-        (255, 0, 255),
-        (75, 0, 130),
-    ]
-    color = 0
-    # to first point
-    pygame.draw.line(screen, colors[color],
-                     (base.x_coordinate,
-                      base.y_coordinate),
-                     (route[0].x_coordinate,
-                      route[0].y_coordinate),
-                     2)
-    # route
-    for i in range(len(route) - 1):
-        if route[i].x_coordinate == base.x_coordinate and route[i].y_coordinate == base.y_coordinate:
-            color += 1
-        pygame.draw.line(screen, colors[color],
-                         (route[i].x_coordinate,
-                          route[i].y_coordinate),
-                         (route[i + 1].x_coordinate,
-                          route[i + 1].y_coordinate),
-                         2)
-
-    # to end point
-    pygame.draw.line(screen, colors[color],
-                     (route[len(route) - 1].x_coordinate,
-                      route[len(route) - 1].y_coordinate),
-                     (base.x_coordinate,
-                      base.y_coordinate),
-                     2)
-
-    pygame.display.flip()
-
-
 def print_vertexes(vertexes_to_print):
     for v in vertexes_to_print:
         print("====================")
@@ -214,15 +109,13 @@ class EvolutionAlgorithm:
             vertex_weight_label = pygame.font.Font(None, 20).render(str(v.weight), 1, (0, 0, 0))
             screen.blit(vertex_weight_label, (v.x_coordinate - 5, v.y_coordinate - 22))
 
-        pygame.display.flip()
-
     def run(self, base):
         # run process
         pygame.init()
 
         # Set up the drawing window
         screen = pygame.display.set_mode([1500, 900])
-        bg = pygame.image.load("/background-map.jpg")
+        bg = pygame.image.load("background-map.jpg")
 
         running = True
         generation = 0
@@ -289,7 +182,7 @@ class EvolutionAlgorithm:
                     min_chromosome = list(d.chromosome)
                     min_ = d.length_route
 
-            draw_route(screen, min_chromosome, base)
+            self.draw_route(screen, min_chromosome, base)
 
             if last_min == min_:
                 equal_counter += 1
@@ -312,6 +205,109 @@ class EvolutionAlgorithm:
             # set minimal chromosome
             self.drone_entity_list[0].chromosome = list(min_chromosome)
 
+    def draw_route(self, screen, route, base):
+        colors = [
+            (205, 92, 92),
+            (255, 140, 0),
+            (255, 160, 122),
+            (0, 0, 128),
+            (178, 34, 34),
+            (255, 182, 193),
+            (255, 20, 147),
+            (255, 127, 80),
+            (0, 255, 255),
+            (221, 160, 221),
+            (255, 0, 255),
+            (75, 0, 130),
+            (205, 92, 92),
+            (255, 140, 0),
+            (255, 160, 122),
+            (0, 0, 128),
+            (178, 34, 34),
+            (255, 182, 193),
+            (255, 20, 147),
+            (255, 127, 80),
+            (255, 215, 0),
+            (221, 160, 221),
+            (255, 0, 255),
+            (75, 0, 130),
+            (205, 92, 92),
+            (255, 140, 0),
+            (255, 160, 122),
+            (0, 0, 128),
+            (178, 34, 34),
+            (255, 182, 193),
+            (255, 20, 147),
+            (255, 127, 80),
+            (255, 215, 0),
+            (221, 160, 221),
+            (255, 0, 255),
+            (75, 0, 130),
+            (205, 92, 92),
+            (255, 140, 0),
+            (255, 160, 122),
+            (0, 0, 128),
+            (178, 34, 34),
+            (255, 182, 193),
+            (255, 20, 147),
+            (255, 127, 80),
+            (255, 215, 0),
+            (221, 160, 221),
+            (255, 0, 255),
+            (75, 0, 130),
+            (205, 92, 92),
+            (255, 140, 0),
+            (255, 160, 122),
+            (0, 0, 128),
+            (178, 34, 34),
+            (255, 182, 193),
+            (255, 20, 147),
+            (255, 127, 80),
+            (255, 215, 0),
+            (221, 160, 221),
+            (255, 0, 255),
+            (75, 0, 130),
+            (205, 92, 92),
+            (255, 140, 0),
+            (255, 160, 122),
+            (0, 0, 128),
+            (178, 34, 34),
+            (255, 182, 193),
+            (255, 20, 147),
+            (255, 127, 80),
+            (255, 215, 0),
+            (221, 160, 221),
+            (255, 0, 255),
+            (75, 0, 130),
+        ]
+        color = 0
+        # to first point
+        pygame.draw.line(screen, colors[color],
+                         (base.x_coordinate,
+                          base.y_coordinate),
+                         (route[0].x_coordinate,
+                          route[0].y_coordinate),
+                         2)
+        # route
+        for i in range(len(route) - 1):
+            if route[i].x_coordinate == base.x_coordinate and route[i].y_coordinate == base.y_coordinate:
+                color += 1
+            pygame.draw.line(screen, colors[color],
+                             (route[i].x_coordinate,
+                              route[i].y_coordinate),
+                             (route[i + 1].x_coordinate,
+                              route[i + 1].y_coordinate),
+                             2)
+
+        # to end point
+        pygame.draw.line(screen, colors[color],
+                         (route[len(route) - 1].x_coordinate,
+                          route[len(route) - 1].y_coordinate),
+                         (base.x_coordinate,
+                          base.y_coordinate),
+                         2)
+
+        pygame.display.flip()
 
 def set_base():
     base_x_coordinate = 700
